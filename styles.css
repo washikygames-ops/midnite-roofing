@@ -1091,32 +1091,218 @@ h1, h2, h3 { font-family: var(--font-head); letter-spacing: 0.02em; line-height:
 }
 
 @media (max-width: 768px) {
-  .nav { display: none; flex-direction: column; gap: 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); padding: 6rem 2rem 2rem; align-items: flex-start; }
+  /* --- Global spacing --- */
+  .container { padding: 0 1.25rem; }
+  .section { padding: 3.5rem 0; }
+  .section-header { margin-bottom: 2rem; }
+
+  /* --- Header --- */
+  .header { padding: 1rem 0; }
+  .header.scrolled { padding: 0.75rem 0; }
+  .logo img { height: 36px; }
+
+  /* --- Full-screen nav overlay --- */
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    padding: 5rem 1.5rem 2rem;
+    align-items: flex-start;
+    overflow-y: auto;
+    z-index: 999;
+  }
   .nav.open { display: flex; }
-  .nav-link { font-size: 1.2rem; padding: 1rem 0; border-bottom: 1px solid var(--border); width: 100%; }
-  .nav-cta { margin-left: 0; margin-top: 1.5rem; }
+  .nav-link {
+    font-size: 1.3rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    color: var(--text);
+  }
+  .nav-cta {
+    margin-left: 0;
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
   .hamburger { display: flex; z-index: 1001; }
-  .services-grid { grid-template-columns: 1fr; }
-  .service-card { height: 380px; }
-  .reviews-grid { grid-template-columns: 1fr; }
-  .areas-columns { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .values-grid { grid-template-columns: 1fr; }
-  .service-detail { grid-template-columns: 1fr; gap: 2rem; }
-  .service-detail.reverse { direction: ltr; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-  .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: span 1; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* --- Hero --- */
+  .hero {
+    height: 100svh;
+    min-height: 580px;
+    align-items: center;
+  }
+  /* Disable heavy animation on mobile for performance */
+  .hero-bg img { animation: none; }
+  .hero-content { padding: 0 1.25rem; }
+  .hero-eyebrow { font-size: 0.6rem; margin-bottom: 1rem; }
+  .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; }
+  .hero-title { font-size: clamp(2.8rem, 13vw, 5rem); margin-bottom: 0.25em; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-areas { font-size: 0.6rem; margin-bottom: 2rem; }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .hero-actions .btn { justify-content: center; padding: 1rem; }
+  .hero-scroll { display: none; }
+
+  /* --- Trust bar --- */
+  .trust-bar { padding: 0.75rem 0; }
+  .trust-bar-inner {
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .trust-divider { display: none; }
-  .trust-bar-inner { gap: 1rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .float-cta span { display: none; }
-  .float-cta { padding: 1rem; }
+  /* Hide less critical trust items, keep rating + phone */
+  .trust-item:nth-child(5),
+  .trust-item:nth-child(7) { display: none; }
+  .trust-item { font-size: 0.62rem; gap: 0.4rem; }
+
+  /* --- Services --- */
+  .services-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .service-card { height: 260px; }
+  /* Show description always on mobile (no hover) */
+  .service-card-desc {
+    transform: translateY(0);
+    opacity: 1;
+    font-size: 0.82rem;
+    margin-bottom: 0;
+    max-width: 100%;
+  }
+  .service-card-content { padding: 1.25rem; }
+  .service-card-title { font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .service-card-arrow { top: 1rem; right: 1rem; width: 36px; height: 36px; }
+
+  /* --- Stats --- */
+  .stats-section { padding: 3rem 0; }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .stat { padding: 1.5rem 1rem; }
+  .stat-value { font-size: 2.5rem; }
+  .stat-label { font-size: 0.62rem; letter-spacing: 0.1em; }
+
+  /* --- About --- */
+  .about-split { grid-template-columns: 1fr; min-height: unset; }
+  .about-image { height: 260px; }
+  .about-content { padding: 2rem 1.5rem; }
+  .about-content p { font-size: 0.9rem; }
+  .about-features { margin: 1.25rem 0 1.75rem; gap: 0.6rem; }
+  .about-feature { font-size: 0.85rem; }
+
+  /* --- Gallery --- */
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 160px;
+    gap: 0.6rem;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; }
+  .gallery-item:nth-child(5) { grid-column: span 1; }
+  /* Always show label on mobile */
+  .gallery-item-overlay { opacity: 1; background: rgba(13,11,18,0.35); }
+  .gallery-item-label { font-size: 0.6rem; padding: 0.4rem 0.75rem; }
+
+  /* --- Reviews --- */
+  .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .review-card { padding: 1.5rem; }
+  .review-text { font-size: 0.875rem; line-height: 1.7; margin-bottom: 1rem; }
+
+  /* --- Areas --- */
+  .areas-columns { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  /* --- CTA section --- */
+  .cta-section { padding: 4rem 0; }
+  .cta-content h2 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  .cta-phone { font-size: clamp(1.6rem, 8vw, 2.5rem); margin: 0.75rem 0 1.5rem; }
+  .cta-sub { font-size: 0.82rem; margin-bottom: 1.5rem; }
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
+  .cta-actions .btn { justify-content: center; }
+
+  /* --- CTA banner (inner pages) --- */
+  .cta-banner { padding: 3rem 0; }
+  .cta-banner-actions { flex-direction: column; align-items: stretch; max-width: 300px; margin: 0 auto; gap: 0.75rem; }
+  .cta-banner .btn-phone, .cta-banner .btn { justify-content: center; }
+
+  /* --- Footer --- */
+  .footer { padding: 3rem 0 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; margin-bottom: 2rem; }
+  .footer-logo img { height: 34px; }
+  .footer-desc { max-width: 100%; font-size: 0.82rem; }
+  /* Hide redundant footer columns on mobile — keep brand + contact */
+  .footer-col:nth-child(2),
+  .footer-col:nth-child(3) { display: none; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; }
+
+  /* --- Floating CTA — pill at bottom centre --- */
+  .float-cta {
+    bottom: 1.25rem;
+    right: 50%;
+    transform: translateX(50%) translateY(20px);
+    padding: 0.9rem 1.75rem;
+    border-radius: 50px;
+  }
+  .float-cta.visible {
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+  }
+  .float-cta span { display: inline; }
+
+  /* --- Page hero (inner pages) --- */
+  .page-hero { height: 45vh; min-height: 260px; padding-bottom: 2.5rem; }
+  .page-hero-title { font-size: clamp(2rem, 9vw, 3.5rem); }
+
+  /* --- Service detail (services page) --- */
+  .service-detail { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 0; }
+  .service-detail.reverse { direction: ltr; }
+  .service-detail-img { aspect-ratio: 16/9; }
+  .service-num-lg { font-size: 3.5rem; }
+  .service-detail-text h2 { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+  .service-detail-text p { font-size: 0.875rem; }
+
+  /* --- Values grid --- */
+  .values-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .value-card { padding: 1.75rem 1.5rem; }
+
+  /* --- Team cards --- */
+  .team-card { padding: 2rem 1.5rem; }
+
+  /* --- Contact --- */
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-info h2 { font-size: 1.5rem; }
+  .contact-form-wrap { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .section { padding: 4rem 0; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: span 1; }
+  .container { padding: 0 1rem; }
+  .section { padding: 2.75rem 0; }
+  .hero-title { font-size: clamp(2.4rem, 14vw, 3.5rem); }
+  .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; gap: 0.5rem; }
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(5) { grid-column: span 1; }
   .form-row { grid-template-columns: 1fr; }
+  .areas-columns { grid-template-columns: 1fr; gap: 1.25rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-value { font-size: 2rem; }
+  .section-title { font-size: clamp(1.6rem, 7vw, 2rem); }
+  .trust-item:nth-child(3),
+  .trust-item:nth-child(5) { display: none; }
 }
