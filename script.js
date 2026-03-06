@@ -19,6 +19,7 @@ const nav = document.getElementById('nav');
 hamburger?.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   nav.classList.toggle('open');
+  header?.classList.toggle('nav-open');
   document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
 });
 
@@ -26,6 +27,7 @@ nav?.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     nav.classList.remove('open');
+    header?.classList.remove('nav-open');
     document.body.style.overflow = '';
   });
 });
